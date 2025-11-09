@@ -46,14 +46,14 @@
         }
 
         section {
-            padding: 80px 0;
+            padding: 60px 0;
         }
 
         .btn {
             display: inline-block;
             background-color: var(--accent-color);
             color: var(--white);
-            padding: 14px 32px;
+            padding: 12px 28px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
@@ -62,6 +62,7 @@
             cursor: pointer;
             text-align: center;
             box-shadow: 0 4px 15px rgba(44, 94, 119, 0.2);
+            font-size: 15px;
         }
 
         .btn:hover {
@@ -80,12 +81,12 @@
 
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .section-title h2 {
-            font-size: 36px;
-            margin-bottom: 15px;
+            font-size: 32px;
+            margin-bottom: 12px;
             color: var(--text-color);
             position: relative;
             display: inline-block;
@@ -94,10 +95,10 @@
         .section-title h2::after {
             content: '';
             position: absolute;
-            width: 70px;
+            width: 60px;
             height: 3px;
             background: var(--accent-color);
-            bottom: -10px;
+            bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -105,8 +106,8 @@
         .section-title p {
             color: var(--light-text);
             max-width: 600px;
-            margin: 20px auto 0;
-            font-size: 18px;
+            margin: 15px auto 0;
+            font-size: 16px;
         }
 
         /* Header */
@@ -131,12 +132,12 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 0;
+            padding: 12px 0;
             transition: var(--transition);
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: var(--text-color);
             text-decoration: none;
@@ -151,7 +152,7 @@
         .logo i {
             margin-right: 8px;
             color: var(--accent-color);
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .nav-links {
@@ -160,7 +161,7 @@
         }
 
         .nav-links li {
-            margin-left: 30px;
+            margin-left: 25px;
         }
 
         .nav-links a {
@@ -170,6 +171,7 @@
             transition: var(--transition);
             position: relative;
             padding: 5px 0;
+            font-size: 15px;
         }
 
         .nav-links a::after {
@@ -195,7 +197,7 @@
 
         .menu-toggle {
             display: none;
-            font-size: 24px;
+            font-size: 22px;
             cursor: pointer;
             color: var(--text-color);
             background: none;
@@ -205,35 +207,34 @@
 
         /* Hero Section */
         .hero {
-            height: 100vh;
+            height: 85vh;
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--white);
-            padding-top: 80px;
+            padding-top: 70px;
         }
 
         .hero-content h1 {
-            font-size: 52px;
-            margin-bottom: 20px;
+            font-size: 42px;
+            margin-bottom: 15px;
             font-weight: 700;
         }
 
         .hero-content p {
-            font-size: 22px;
-            margin-bottom: 40px;
-            max-width: 700px;
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
         }
 
         .hero-btns {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
@@ -241,7 +242,7 @@
         .about-content {
             display: flex;
             align-items: center;
-            gap: 60px;
+            gap: 40px;
         }
 
         .about-text {
@@ -249,38 +250,49 @@
         }
 
         .about-text h3 {
-            font-size: 28px;
-            margin-bottom: 20px;
+            font-size: 24px;
+            margin-bottom: 15px;
             color: var(--accent-color);
         }
 
         .about-text p {
-            margin-bottom: 20px;
-            font-size: 17px;
+            margin-bottom: 15px;
+            font-size: 15px;
         }
 
         .features {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-top: 30px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .feature {
             display: flex;
             align-items: flex-start;
-            gap: 15px;
+            gap: 12px;
         }
 
         .feature i {
             color: var(--accent-color);
-            font-size: 20px;
-            margin-top: 5px;
+            font-size: 18px;
+            margin-top: 3px;
+        }
+
+        .feature div h4 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        .feature div p {
+            font-size: 14px;
+            margin-bottom: 0;
+            color: var(--light-text);
         }
 
         .about-image {
             flex: 1;
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
             box-shadow: var(--shadow);
             position: relative;
@@ -319,61 +331,40 @@
         }
 
         .rooms-grid {
-            display: flex;
-            gap: 30px;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            padding: 20px 0;
-            scrollbar-width: thin;
-            scrollbar-color: var(--accent-color) #f1f1f1;
-        }
-
-        .rooms-grid::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .rooms-grid::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        .rooms-grid::-webkit-scrollbar-thumb {
-            background: var(--accent-color);
-            border-radius: 10px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
         }
 
         .room-card {
             background-color: var(--white);
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
             box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
-            min-width: 320px;
-            flex-shrink: 0;
-            scroll-snap-align: start;
         }
 
         .room-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
         }
 
         .room-badge {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: var(--accent-color);
             color: var(--white);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 14px;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
             font-weight: 600;
             z-index: 2;
         }
 
         .room-image {
-            height: 240px;
+            height: 200px;
             overflow: hidden;
         }
 
@@ -389,38 +380,45 @@
         }
 
         .room-details {
-            padding: 25px;
+            padding: 20px;
         }
 
         .room-details h3 {
-            margin-bottom: 10px;
-            font-size: 22px;
+            margin-bottom: 8px;
+            font-size: 20px;
+        }
+
+        .room-details > p {
+            font-size: 14px;
+            color: var(--light-text);
+            margin-bottom: 12px;
         }
 
         .room-price {
             color: var(--accent-color);
             font-weight: 700;
-            font-size: 24px;
-            margin: 15px 0;
+            font-size: 20px;
+            margin: 12px 0;
         }
 
         .room-features {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
-            margin: 15px 0;
+            gap: 12px;
+            margin: 12px 0;
         }
 
         .room-feature {
             display: flex;
             align-items: center;
             gap: 5px;
-            font-size: 14px;
+            font-size: 13px;
             color: var(--light-text);
         }
 
         .room-feature i {
             color: var(--accent-color);
+            font-size: 12px;
         }
 
         /* Rezervare */
@@ -430,33 +428,34 @@
         }
 
         .reservation-form {
-            max-width: 700px;
+            max-width: 600px;
             margin: 0 auto;
             background-color: var(--white);
-            padding: 50px;
-            border-radius: 15px;
+            padding: 35px;
+            border-radius: 12px;
             box-shadow: var(--shadow);
             position: relative;
             z-index: 1;
         }
 
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 500;
             color: var(--text-color);
+            font-size: 14px;
         }
 
         .form-control {
             width: 100%;
-            padding: 15px;
+            padding: 12px;
             border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 6px;
+            font-size: 15px;
             transition: var(--transition);
             background-color: #f9f9f9;
         }
@@ -470,7 +469,7 @@
 
         .form-row {
             display: flex;
-            gap: 20px;
+            gap: 15px;
         }
 
         .form-row .form-group {
@@ -479,76 +478,88 @@
 
         .price-summary {
             background-color: #f0f7fa;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 25px 0;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
             text-align: center;
         }
 
         .price-summary h4 {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: var(--accent-color);
+            font-size: 16px;
         }
 
         .total-price {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             color: var(--accent-color);
+        }
+
+        .price-summary p {
+            font-size: 13px;
+            margin-top: 5px;
+            color: var(--light-text);
         }
 
         /* Contact */
         .contact-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
         }
 
         .contact-info {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
         }
 
         .contact-item {
             display: flex;
             align-items: flex-start;
-            gap: 20px;
-            padding: 25px;
+            gap: 15px;
+            padding: 20px;
             background-color: var(--white);
-            border-radius: 10px;
+            border-radius: 8px;
             box-shadow: var(--shadow);
             transition: var(--transition);
         }
 
         .contact-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
         }
 
         .contact-icon {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             background: var(--accent-color);
             color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 20px;
             flex-shrink: 0;
         }
 
         .contact-details h3 {
-            margin-bottom: 10px;
-            font-size: 20px;
+            margin-bottom: 8px;
+            font-size: 18px;
+        }
+
+        .contact-details p {
+            font-size: 14px;
+            color: var(--light-text);
         }
 
         .map-container {
-            border-radius: 10px;
+            border-radius: 8px;
             overflow: hidden;
             box-shadow: var(--shadow);
             height: 100%;
-            min-height: 400px;
+            min-height: 300px;
         }
 
         .map-container iframe {
@@ -561,27 +572,27 @@
         footer {
             background-color: var(--text-color);
             color: var(--white);
-            padding: 70px 0 20px;
+            padding: 50px 0 15px;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
         }
 
         .footer-column h3 {
-            margin-bottom: 25px;
-            font-size: 22px;
+            margin-bottom: 20px;
+            font-size: 18px;
             position: relative;
-            padding-bottom: 10px;
+            padding-bottom: 8px;
         }
 
         .footer-column h3::after {
             content: '';
             position: absolute;
-            width: 40px;
+            width: 35px;
             height: 2px;
             background: var(--accent-light);
             bottom: 0;
@@ -589,8 +600,9 @@
         }
 
         .footer-column p {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #b2bec3;
+            font-size: 14px;
         }
 
         .footer-links {
@@ -598,7 +610,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .footer-links a {
@@ -607,7 +619,8 @@
             transition: var(--transition);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+            font-size: 14px;
         }
 
         .footer-links a:hover {
@@ -617,20 +630,21 @@
 
         .social-links {
             display: flex;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 15px;
         }
 
         .social-links a {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 36px;
+            height: 36px;
             background: rgba(255, 255, 255, 0.1);
             color: var(--white);
             border-radius: 50%;
             transition: var(--transition);
+            font-size: 14px;
         }
 
         .social-links a:hover {
@@ -640,26 +654,26 @@
 
         .copyright {
             text-align: center;
-            padding-top: 30px;
+            padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #b2bec3;
-            font-size: 14px;
+            font-size: 13px;
         }
 
         /* Back to top */
         .back-to-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
+            bottom: 25px;
+            right: 25px;
+            width: 45px;
+            height: 45px;
             background: var(--accent-color);
             color: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            font-size: 18px;
             cursor: pointer;
             transition: var(--transition);
             opacity: 0;
@@ -675,33 +689,21 @@
 
         .back-to-top:hover {
             background: #234a5e;
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
 
         /* Responsive Design */
-        @media (min-width: 992px) {
-            .rooms-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-                overflow-x: visible;
-            }
-            
-            .room-card {
-                min-width: auto;
-            }
-        }
-
         @media (max-width: 992px) {
             .about-content {
                 flex-direction: column;
             }
 
             .hero-content h1 {
-                font-size: 42px;
+                font-size: 36px;
             }
 
             .hero-content p {
-                font-size: 20px;
+                font-size: 16px;
             }
         }
 
@@ -719,11 +721,11 @@
                 top: 0;
                 right: -100%;
                 width: 80%;
-                max-width: 300px;
+                max-width: 280px;
                 height: 100vh;
                 flex-direction: column;
                 background: var(--white);
-                padding: 80px 30px 30px;
+                padding: 70px 25px 25px;
                 transition: var(--transition);
                 box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
                 z-index: 1000;
@@ -734,21 +736,26 @@
             }
 
             .nav-links li {
-                margin: 15px 0;
+                margin: 12px 0;
             }
 
             .nav-links a {
-                font-size: 18px;
-                padding: 10px 0;
+                font-size: 16px;
+                padding: 8px 0;
                 display: block;
             }
 
+            .hero {
+                height: 75vh;
+                padding-top: 60px;
+            }
+
             .hero-content h1 {
-                font-size: 36px;
+                font-size: 30px;
             }
 
             .hero-content p {
-                font-size: 18px;
+                font-size: 15px;
             }
 
             .hero-btns {
@@ -766,33 +773,41 @@
             }
 
             .reservation-form {
-                padding: 30px;
+                padding: 25px;
             }
 
             .contact-content {
                 grid-template-columns: 1fr;
             }
+
+            section {
+                padding: 50px 0;
+            }
         }
 
         @media (max-width: 576px) {
             .section-title h2 {
-                font-size: 30px;
+                font-size: 28px;
             }
 
             .room-features {
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
             }
 
             .back-to-top {
                 bottom: 20px;
                 right: 20px;
-                width: 45px;
-                height: 45px;
+                width: 40px;
+                height: 40px;
             }
             
             .logo {
-                font-size: 20px;
+                font-size: 18px;
+            }
+
+            .rooms-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -840,40 +855,40 @@
                 <div class="about-text">
                     <h3>O tradiție de excelență în ospitalitate</h3>
                     <p>Hotel Casa Locato este un refugiu de eleganță și confort, situat în centrul Bucureștiului. Cu o istorie bogată și o tradiție de ospitalitate de peste 20 de ani, ne mândrim să oferim oaspeților noștri o experiență memorabilă.</p>
-                    <p>Fiecare detaliu a fost gândit pentru a vă oferi o ședere perfectă, de la designul interior rafinat până la serviciile personalizate. Echipa noastră dedicată este întotdeauna disponibilă pentru a vă asigura că fiecare moment petrecut la Casa Locato este unul special.</p>
+                    <p>Fiecare detaliu a fost gândit pentru a vă oferi o ședere perfectă, de la designul interior rafinat până la serviciile personalizate.</p>
                     <div class="features">
                         <div class="feature">
                             <i class="fas fa-wifi"></i>
                             <div>
                                 <h4>Wi-Fi gratuit</h4>
-                                <p>Viteză mare în toate zonele hotelului</p>
+                                <p>Viteză mare în toate zonele</p>
                             </div>
                         </div>
                         <div class="feature">
                             <i class="fas fa-parking"></i>
                             <div>
                                 <h4>Parcare privată</h4>
-                                <p>Loc de parcare securizat pentru oaspeți</p>
+                                <p>Loc securizat pentru oaspeți</p>
                             </div>
                         </div>
                         <div class="feature">
                             <i class="fas fa-utensils"></i>
                             <div>
                                 <h4>Restaurant</h4>
-                                <p>Bucătărie românească și internațională</p>
+                                <p>Bucătărie românească</p>
                             </div>
                         </div>
                         <div class="feature">
                             <i class="fas fa-concierge-bell"></i>
                             <div>
                                 <h4>Servicii premium</h4>
-                                <p>Room service și concierge non-stop</p>
+                                <p>Room service non-stop</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hotel Casa Locato">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Casa Locato">
                 </div>
             </div>
         </div>
@@ -892,19 +907,18 @@
                     <div class="room-card">
                         <div class="room-badge">Populară</div>
                         <div class="room-image">
-                            <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera Standard">
+                            <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Camera Standard">
                         </div>
                         <div class="room-details">
                             <h3>Camera Standard</h3>
-                            <p>O cameră confortabilă, perfectă pentru o ședere scurtă. Include pat dublu, baie privată și toate facilitățile necesare.</p>
+                            <p>O cameră confortabilă, perfectă pentru o ședere scurtă.</p>
                             <div class="room-price">250 RON/noapte</div>
                             <div class="room-features">
                                 <div class="room-feature"><i class="fas fa-user-friends"></i> 2 persoane</div>
                                 <div class="room-feature"><i class="fas fa-ruler-combined"></i> 25 m²</div>
-                                <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
-                                <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                                <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi</div>
                             </div>
-                            <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
+                            <a href="#reservation" class="btn" style="width: 100%; margin-top: 10px;">Rezervă acum</a>
                         </div>
                     </div>
 
@@ -912,19 +926,18 @@
                     <div class="room-card">
                         <div class="room-badge">Recomandată</div>
                         <div class="room-image">
-                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera Superioară">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Camera Superioară">
                         </div>
                         <div class="room-details">
                             <h3>Camera Superioară</h3>
-                            <p>Mai spațioasă, cu vedere la oraș și facilități îmbunătățite. Ideală pentru o ședere relaxantă.</p>
+                            <p>Mai spațioasă, cu vedere la oraș și facilități îmbunătățite.</p>
                             <div class="room-price">350 RON/noapte</div>
                             <div class="room-features">
                                 <div class="room-feature"><i class="fas fa-user-friends"></i> 2-3 persoane</div>
                                 <div class="room-feature"><i class="fas fa-ruler-combined"></i> 35 m²</div>
-                                <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
-                                <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                                <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi</div>
                             </div>
-                            <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
+                            <a href="#reservation" class="btn" style="width: 100%; margin-top: 10px;">Rezervă acum</a>
                         </div>
                     </div>
 
@@ -932,19 +945,18 @@
                     <div class="room-card">
                         <div class="room-badge">Lux</div>
                         <div class="room-image">
-                            <img src="https://images.unsplash.com-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suite">
+                            <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Suite">
                         </div>
                         <div class="room-details">
                             <h3>Suite</h3>
-                            <p>Experiență premium cu living separat, baie cu cadă și servicii exclusive. Lux și confort la cel mai înalt nivel.</p>
+                            <p>Experiență premium cu living separat și servicii exclusive.</p>
                             <div class="room-price">500 RON/noapte</div>
                             <div class="room-features">
                                 <div class="room-feature"><i class="fas fa-user-friends"></i> 2-4 persoane</div>
                                 <div class="room-feature"><i class="fas fa-ruler-combined"></i> 55 m²</div>
-                                <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
-                                <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                                <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi</div>
                             </div>
-                            <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
+                            <a href="#reservation" class="btn" style="width: 100%; margin-top: 10px;">Rezervă acum</a>
                         </div>
                     </div>
                 </div>
