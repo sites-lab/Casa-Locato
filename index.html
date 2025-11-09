@@ -136,7 +136,7 @@
         }
 
         .logo {
-            font-size: 28px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-color);
             text-decoration: none;
@@ -149,8 +149,9 @@
         }
 
         .logo i {
-            margin-right: 10px;
+            margin-right: 8px;
             color: var(--accent-color);
+            font-size: 20px;
         }
 
         .nav-links {
@@ -197,6 +198,9 @@
             font-size: 24px;
             cursor: pointer;
             color: var(--text-color);
+            background: none;
+            border: none;
+            z-index: 1001;
         }
 
         /* Hero Section */
@@ -306,10 +310,36 @@
         }
 
         /* Camere */
+        .rooms-section {
+            position: relative;
+        }
+
+        .rooms-container {
+            overflow: visible;
+        }
+
         .rooms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            display: flex;
             gap: 30px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding: 20px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-color) #f1f1f1;
+        }
+
+        .rooms-grid::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .rooms-grid::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .rooms-grid::-webkit-scrollbar-thumb {
+            background: var(--accent-color);
+            border-radius: 10px;
         }
 
         .room-card {
@@ -319,6 +349,9 @@
             box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
+            min-width: 320px;
+            flex-shrink: 0;
+            scroll-snap-align: start;
         }
 
         .room-card:hover {
@@ -646,6 +679,18 @@
         }
 
         /* Responsive Design */
+        @media (min-width: 992px) {
+            .rooms-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                overflow-x: visible;
+            }
+            
+            .room-card {
+                min-width: auto;
+            }
+        }
+
         @media (max-width: 992px) {
             .about-content {
                 flex-direction: column;
@@ -670,22 +715,32 @@
             }
 
             .nav-links {
-                display: none;
-                width: 100%;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
                 flex-direction: column;
-                margin-top: 20px;
                 background: var(--white);
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: var(--shadow);
+                padding: 80px 30px 30px;
+                transition: var(--transition);
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                z-index: 1000;
             }
 
             .nav-links.active {
-                display: flex;
+                right: 0;
             }
 
             .nav-links li {
-                margin: 10px 0;
+                margin: 15px 0;
+            }
+
+            .nav-links a {
+                font-size: 18px;
+                padding: 10px 0;
+                display: block;
             }
 
             .hero-content h1 {
@@ -714,10 +769,6 @@
                 padding: 30px;
             }
 
-            .rooms-grid {
-                grid-template-columns: 1fr;
-            }
-
             .contact-content {
                 grid-template-columns: 1fr;
             }
@@ -739,6 +790,10 @@
                 width: 45px;
                 height: 45px;
             }
+            
+            .logo {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
@@ -748,7 +803,7 @@
         <div class="container">
             <nav class="navbar">
                 <a href="#" class="logo"><i class="fas fa-hotel"></i>Hotel <span>Casa Locato</span></a>
-                <div class="menu-toggle">☰</div>
+                <button class="menu-toggle">☰</button>
                 <ul class="nav-links">
                     <li><a href="#home" class="active">Acasă</a></li>
                     <li><a href="#about">Despre</a></li>
@@ -825,70 +880,72 @@
     </section>
 
     <!-- Camere -->
-    <section id="rooms">
+    <section id="rooms" class="rooms-section">
         <div class="container">
             <div class="section-title">
                 <h2>Camerele noastre</h2>
                 <p>Alegeți între varietatea noastră de camere elegante și confortabile</p>
             </div>
-            <div class="rooms-grid">
-                <!-- Camera 1 -->
-                <div class="room-card">
-                    <div class="room-badge">Populară</div>
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera Standard">
-                    </div>
-                    <div class="room-details">
-                        <h3>Camera Standard</h3>
-                        <p>O cameră confortabilă, perfectă pentru o ședere scurtă. Include pat dublu, baie privată și toate facilitățile necesare.</p>
-                        <div class="room-price">250 RON/noapte</div>
-                        <div class="room-features">
-                            <div class="room-feature"><i class="fas fa-user-friends"></i> 2 persoane</div>
-                            <div class="room-feature"><i class="fas fa-ruler-combined"></i> 25 m²</div>
-                            <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
-                            <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+            <div class="rooms-container">
+                <div class="rooms-grid">
+                    <!-- Camera 1 -->
+                    <div class="room-card">
+                        <div class="room-badge">Populară</div>
+                        <div class="room-image">
+                            <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera Standard">
                         </div>
-                        <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
+                        <div class="room-details">
+                            <h3>Camera Standard</h3>
+                            <p>O cameră confortabilă, perfectă pentru o ședere scurtă. Include pat dublu, baie privată și toate facilitățile necesare.</p>
+                            <div class="room-price">250 RON/noapte</div>
+                            <div class="room-features">
+                                <div class="room-feature"><i class="fas fa-user-friends"></i> 2 persoane</div>
+                                <div class="room-feature"><i class="fas fa-ruler-combined"></i> 25 m²</div>
+                                <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
+                                <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                            </div>
+                            <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Camera 2 -->
-                <div class="room-card">
-                    <div class="room-badge">Recomandată</div>
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera Superioară">
-                    </div>
-                    <div class="room-details">
-                        <h3>Camera Superioară</h3>
-                        <p>Mai spațioasă, cu vedere la oraș și facilități îmbunătățite. Ideală pentru o ședere relaxantă.</p>
-                        <div class="room-price">350 RON/noapte</div>
-                        <div class="room-features">
-                            <div class="room-feature"><i class="fas fa-user-friends"></i> 2-3 persoane</div>
-                            <div class="room-feature"><i class="fas fa-ruler-combined"></i> 35 m²</div>
-                            <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
-                            <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                    <!-- Camera 2 -->
+                    <div class="room-card">
+                        <div class="room-badge">Recomandată</div>
+                        <div class="room-image">
+                            <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera Superioară">
                         </div>
-                        <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
+                        <div class="room-details">
+                            <h3>Camera Superioară</h3>
+                            <p>Mai spațioasă, cu vedere la oraș și facilități îmbunătățite. Ideală pentru o ședere relaxantă.</p>
+                            <div class="room-price">350 RON/noapte</div>
+                            <div class="room-features">
+                                <div class="room-feature"><i class="fas fa-user-friends"></i> 2-3 persoane</div>
+                                <div class="room-feature"><i class="fas fa-ruler-combined"></i> 35 m²</div>
+                                <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
+                                <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                            </div>
+                            <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Camera 3 -->
-                <div class="room-card">
-                    <div class="room-badge">Lux</div>
-                    <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suite">
-                    </div>
-                    <div class="room-details">
-                        <h3>Suite</h3>
-                        <p>Experiență premium cu living separat, baie cu cadă și servicii exclusive. Lux și confort la cel mai înalt nivel.</p>
-                        <div class="room-price">500 RON/noapte</div>
-                        <div class="room-features">
-                            <div class="room-feature"><i class="fas fa-user-friends"></i> 2-4 persoane</div>
-                            <div class="room-feature"><i class="fas fa-ruler-combined"></i> 55 m²</div>
-                            <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
-                            <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                    <!-- Camera 3 -->
+                    <div class="room-card">
+                        <div class="room-badge">Lux</div>
+                        <div class="room-image">
+                            <img src="https://images.unsplash.com-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suite">
                         </div>
-                        <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
+                        <div class="room-details">
+                            <h3>Suite</h3>
+                            <p>Experiență premium cu living separat, baie cu cadă și servicii exclusive. Lux și confort la cel mai înalt nivel.</p>
+                            <div class="room-price">500 RON/noapte</div>
+                            <div class="room-features">
+                                <div class="room-feature"><i class="fas fa-user-friends"></i> 2-4 persoane</div>
+                                <div class="room-feature"><i class="fas fa-ruler-combined"></i> 55 m²</div>
+                                <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
+                                <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                            </div>
+                            <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -905,19 +962,19 @@
             <div class="reservation-form">
                 <form id="booking-form">
                     <div class="form-group">
-                        <label for="name">Nume complet</label>
+                        <label for="name">Nume complet *</label>
                         <input type="text" id="name" class="form-control" required placeholder="Introduceți numele dvs.">
                     </div>
                     <div class="form-group">
-                        <label for="phone">Număr de telefon</label>
+                        <label for="phone">Număr de telefon *</label>
                         <input type="tel" id="phone" class="form-control" required placeholder="Introduceți numărul de telefon">
                     </div>
                     <div class="form-group">
                         <label for="email">Adresă de email</label>
-                        <input type="email" id="email" class="form-control" required placeholder="Introduceți adresa de email">
+                        <input type="email" id="email" class="form-control" placeholder="Introduceți adresa de email (opțional)">
                     </div>
                     <div class="form-group">
-                        <label for="room-type">Tip cameră</label>
+                        <label for="room-type">Tip cameră *</label>
                         <select id="room-type" class="form-control" required>
                             <option value="">Selectează tipul camerei</option>
                             <option value="standard" data-price="250">Camera Standard - 250 RON/noapte</option>
@@ -927,21 +984,21 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="checkin">Data check-in</label>
+                            <label for="checkin">Data check-in *</label>
                             <input type="date" id="checkin" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="checkout">Data check-out</label>
+                            <label for="checkout">Data check-out *</label>
                             <input type="date" id="checkout" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="nights">Număr de nopți</label>
+                            <label for="nights">Număr de nopți *</label>
                             <input type="number" id="nights" class="form-control" min="1" value="1" required>
                         </div>
                         <div class="form-group">
-                            <label for="persons">Număr de persoane</label>
+                            <label for="persons">Număr de persoane *</label>
                             <input type="number" id="persons" class="form-control" min="1" value="1" required>
                         </div>
                     </div>
@@ -1053,6 +1110,15 @@
         // Meniu mobil
         document.querySelector('.menu-toggle').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
+            this.textContent = document.querySelector('.nav-links').classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Închide meniul la click pe link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+                document.querySelector('.menu-toggle').textContent = '☰';
+            });
         });
 
         // Header la scroll
@@ -1145,29 +1211,25 @@
                 // Mesaj cu emoji-uri pentru dispozitive mobile
                 message += `👤 *Nume client:* ${name}%0A`;
                 message += `📞 *Telefon:* ${phone}%0A`;
-                message += `📧 *Email:* ${email}%0A`;
+                if (email) message += `📧 *Email:* ${email}%0A`;
                 message += `🛏️ *Tip cameră:* ${roomType}%0A`;
                 message += `📅 *Check-in:* ${checkin}%0A`;
                 message += `📅 *Check-out:* ${checkout}%0A`;
                 message += `🌙 *Număr nopți:* ${nights}%0A`;
                 message += `👥 *Număr persoane:* ${persons}%0A`;
-                message += `💰 *Preț total estimat:* ${totalPrice} RON%0A%0A`;
-                message += `✅ *Vă rugăm să confirmați această rezervare!*%0A`;
-                message += `❓ *Aveți întrebări? Sunați-ne la +40 729 552 767*`;
+                message += `💰 *Preț total estimat:* ${totalPrice} RON`;
             } else {
                 // Mesaj simplu pentru desktop
                 message += `*REZERVARE HOTEL CASA LOCATO*%0A%0A`;
                 message += `*Nume client:* ${name}%0A`;
                 message += `*Telefon:* ${phone}%0A`;
-                message += `*Email:* ${email}%0A`;
+                if (email) message += `*Email:* ${email}%0A`;
                 message += `*Tip cameră:* ${roomType}%0A`;
                 message += `*Check-in:* ${checkin}%0A`;
                 message += `*Check-out:* ${checkout}%0A`;
                 message += `*Număr nopți:* ${nights}%0A`;
                 message += `*Număr persoane:* ${persons}%0A`;
-                message += `*Preț total estimat:* ${totalPrice} RON%0A%0A`;
-                message += `*Vă rugăm să confirmați această rezervare!*%0A`;
-                message += `*Aveți întrebări? Sunați-ne la +40 729 552 767*`;
+                message += `*Preț total estimat:* ${totalPrice} RON`;
             }
             
             // Deschide WhatsApp cu mesajul
