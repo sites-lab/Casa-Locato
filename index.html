@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Casa Locato</title>
+    <style>
+        /* Reset și stiluri generale */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #e8d8c3; /* Bej deschis */
+            --secondary-color: #f5f5f5; /* Alb gri */
+            --accent-color: #a5c8ca; /* Albastru deschis */
+            --text-color: #333;
+            --light-text: #666;
+            --white: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header și navigație */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #8fb3b5;
+        }
+
+        /* Secțiuni generale */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .section-title p {
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Despre noi */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Camere */
+        .rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .room-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .room-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .room-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .room-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .room-card:hover .room-image img {
+            transform: scale(1.1);
+        }
+
+        .room-details {
+            padding: 20px;
+        }
+
+        .room-details h3 {
+            margin-bottom: 10px;
+            font-size: 22px;
+        }
+
+        .room-price {
+            color: var(--accent-color);
+            font-weight: bold;
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        /* Formular de rezervare */
+        .reservation {
+            background-color: var(--primary-color);
+        }
+
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Contact */
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .contact-item {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-item i {
+            font-size: 36px;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: var(--white);
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                margin-top: 20px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .hero-content h1 {
+                font-size: 36px;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header și navigație -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">Hotel <span>Casa Locato</span></a>
+                <div class="menu-toggle">☰</div>
+                <ul class="nav-links">
+                    <li><a href="#home">Acasă</a></li>
+                    <li><a href="#about">Despre</a></li>
+                    <li><a href="#rooms">Camere</a></li>
+                    <li><a href="#reservation">Rezervare</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Bun venit la Hotel Casa Locato</h1>
+            <p>Oaza de relaxare și confort în inima orașului</p>
+            <a href="#reservation" class="btn">Rezervă acum</a>
+        </div>
+    </section>
+
+    <!-- Despre noi -->
+    <section id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Despre noi</h2>
+                <p>Descoperiți povestea și valorile hotelului nostru</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Hotel Casa Locato este un refugiu de eleganță și confort, situat într-o locație privilegiată. Cu o istorie bogată și o tradiție de ospitalitate de peste 20 de ani, ne mândrim să oferim oaspeților noștri o experiență memorabilă.</p>
+                    <p>Fiecare detaliu a fost gândit pentru a vă oferi o ședere perfectă, de la designul interior rafinat până la serviciile personalizate. Echipa noastră dedicată este întotdeauna disponibilă pentru a vă asigura că fiecare moment petrecut la Casa Locato este unul special.</p>
+                    <p>Indiferent dacă sunteți în călătorie de afaceri sau în vacanță, vă garantăm că vă veți simți ca acasă, într-un mediu care combină profesionalismul cu căldura ospitalității autentice.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Casa Locato">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Camere -->
+    <section id="rooms">
+        <div class="container">
+            <div class="section-title">
+                <h2>Camerele noastre</h2>
+                <p>Alegeți între varietatea noastră de camere elegante și confortabile</p>
+            </div>
+            <div class="rooms-grid">
+                <!-- Camera 1 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Camera Standard">
+                    </div>
+                    <div class="room-details">
+                        <h3>Camera Standard</h3>
+                        <p>O cameră confortabilă, perfectă pentru o ședere scurtă. Include pat dublu, baie privată și toate facilitățile necesare.</p>
+                        <div class="room-price">250 RON/noapte</div>
+                    </div>
+                </div>
+
+                <!-- Camera 2 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Camera Superioară">
+                    </div>
+                    <div class="room-details">
+                        <h3>Camera Superioară</h3>
+                        <p>Mai spațioasă, cu vedere la oraș și facilități îmbunătățite. Ideală pentru o ședere relaxantă.</p>
+                        <div class="room-price">350 RON/noapte</div>
+                    </div>
+                </div>
+
+                <!-- Camera 3 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Suite">
+                    </div>
+                    <div class="room-details">
+                        <h3>Suite</h3>
+                        <p>Experiență premium cu living separat, baie cu cadă și servicii exclusive. Lux și confort la cel mai înalt nivel.</p>
+                        <div class="room-price">500 RON/noapte</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rezervare -->
+    <section class="reservation" id="reservation">
+        <div class="container">
+            <div class="section-title">
+                <h2>Rezervare</h2>
+                <p>Completează formularul pentru a-ți asigura șederea la Hotel Casa Locato</p>
+            </div>
+            <div class="reservation-form">
+                <form id="booking-form">
+                    <div class="form-group">
+                        <label for="name">Nume complet</label>
+                        <input type="text" id="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Număr de telefon</label>
+                        <input type="tel" id="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="room-type">Tip cameră</label>
+                        <select id="room-type" class="form-control" required>
+                            <option value="">Selectează tipul camerei</option>
+                            <option value="standard" data-price="250">Camera Standard - 250 RON/noapte</option>
+                            <option value="superior" data-price="350">Camera Superioară - 350 RON/noapte</option>
+                            <option value="suite" data-price="500">Suite - 500 RON/noapte</option>
+                        </select>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nights">Număr de nopți</label>
+                            <input type="number" id="nights" class="form-control" min="1" value="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="persons">Număr de persoane</label>
+                            <input type="number" id="persons" class="form-control" min="1" value="1" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Preț total estimat: <span id="total-price">0</span> RON</label>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Trimite rezervarea pe WhatsApp</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact</h2>
+                <p>Nu ezitați să ne contactați pentru orice informații suplimentare</p>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i>📞</i>
+                    <h3>Telefon</h3>
+                    <p>+40 729 552 767</p>
+                </div>
+                <div class="contact-item">
+                    <i>✉️</i>
+                    <h3>Email</h3>
+                    <p>contact@casalocato.ro</p>
+                </div>
+                <div class="contact-item">
+                    <i>📍</i>
+                    <h3>Adresă</h3>
+                    <p>Strada Principală, Nr. 123, București</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Hotel Casa Locato</h3>
+                    <p>Oază de relaxare și confort în inima orașului, unde tradiția se întâlnește cu modernitatea.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Link-uri rapide</h3>
+                    <ul>
+                        <li><a href="#home">Acasă</a></li>
+                        <li><a href="#about">Despre noi</a></li>
+                        <li><a href="#rooms">Camere</a></li>
+                        <li><a href="#reservation">Rezervare</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>📞 +40 729 552 767</li>
+                        <li>✉️ contact@casalocato.ro</li>
+                        <li>📍 Strada Principală, Nr. 123, București</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Hotel Casa Locato. Toate drepturile rezervate.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Meniu mobil
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Calcul preț total
+        const roomTypeSelect = document.getElementById('room-type');
+        const nightsInput = document.getElementById('nights');
+        const totalPriceSpan = document.getElementById('total-price');
+
+        function calculateTotalPrice() {
+            const selectedOption = roomTypeSelect.options[roomTypeSelect.selectedIndex];
+            const pricePerNight = selectedOption ? parseInt(selectedOption.getAttribute('data-price')) || 0 : 0;
+            const nights = parseInt(nightsInput.value) || 0;
+            const totalPrice = pricePerNight * nights;
+            totalPriceSpan.textContent = totalPrice;
+        }
+
+        roomTypeSelect.addEventListener('change', calculateTotalPrice);
+        nightsInput.addEventListener('input', calculateTotalPrice);
+
+        // Formular de rezervare
+        document.getElementById('booking-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obține datele din formular
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const roomType = roomTypeSelect.options[roomTypeSelect.selectedIndex].text;
+            const nights = nightsInput.value;
+            const persons = document.getElementById('persons').value;
+            const totalPrice = totalPriceSpan.textContent;
+            
+            // Creează mesajul pentru WhatsApp
+            const message = `Bună! Doresc să fac o rezervare la Hotel Casa Locato:%0A%0A` +
+                           `Nume: ${name}%0A` +
+                           `Telefon: ${phone}%0A` +
+                           `Tip cameră: ${roomType}%0A` +
+                           `Număr nopți: ${nights}%0A` +
+                           `Număr persoane: ${persons}%0A` +
+                           `Preț total estimat: ${totalPrice} RON`;
+            
+            // Deschide WhatsApp cu mesajul
+            const whatsappUrl = `https://wa.me/40729552767?text=${message}`;
+            window.open(whatsappUrl, '_blank');
+        });
+
+        // Scroll smooth pentru link-uri
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Închide meniul mobil dacă este deschis
+                    document.querySelector('.nav-links').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
