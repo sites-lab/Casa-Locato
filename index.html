@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Casa Locato</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /* Reset și stiluri generale */
         * {
@@ -34,6 +35,34 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 15px;
+        }
+
+        /* Animații */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .slide-in-left {
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .slide-in-right {
+            animation: slideInRight 1s ease-out;
         }
 
         /* Header și navigație */
@@ -77,6 +106,22 @@
             color: var(--text-color);
             font-weight: 500;
             transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .nav-links a:hover {
@@ -92,7 +137,7 @@
         /* Hero Section */
         .hero {
             height: 80vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -105,11 +150,13 @@
         .hero-content h1 {
             font-size: 48px;
             margin-bottom: 20px;
+            animation: fadeIn 1.5s ease-out;
         }
 
         .hero-content p {
             font-size: 20px;
             margin-bottom: 30px;
+            animation: fadeIn 2s ease-out;
         }
 
         .btn {
@@ -120,16 +167,28 @@
             border-radius: 5px;
             text-decoration: none;
             font-weight: 500;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
             background-color: #8fb3b5;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
         }
 
         /* Secțiuni generale */
         section {
             padding: 80px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title {
@@ -141,12 +200,24 @@
             font-size: 36px;
             margin-bottom: 15px;
             color: var(--text-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 20%;
         }
 
         .section-title p {
             color: var(--light-text);
             max-width: 600px;
-            margin: 0 auto;
+            margin: 20px auto 0;
         }
 
         /* Despre noi */
@@ -165,12 +236,22 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover {
+            transform: scale(1.03);
         }
 
         .about-image img {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.1);
         }
 
         /* Camere */
@@ -185,11 +266,12 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            transition: all 0.3s;
         }
 
         .room-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
         }
 
         .room-image {
@@ -236,6 +318,11 @@
             padding: 40px;
             border-radius: 10px;
             box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .reservation-form:hover {
+            transform: translateY(-5px);
         }
 
         .form-group {
@@ -254,6 +341,13 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-size: 16px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 2px rgba(165, 200, 202, 0.3);
+            outline: none;
         }
 
         .form-row {
@@ -279,6 +373,12 @@
             background-color: var(--white);
             border-radius: 10px;
             box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
         }
 
         .contact-item i {
@@ -392,7 +492,7 @@
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>Bun venit la Hotel Casa Locato</h1>
-            <p>Oaza de relaxare și confort în inima orașului</p>
+            <p>Oaza de relaxare și confort în inima Bucureștiului</p>
             <a href="#reservation" class="btn">Rezervă acum</a>
         </div>
     </section>
@@ -405,13 +505,13 @@
                 <p>Descoperiți povestea și valorile hotelului nostru</p>
             </div>
             <div class="about-content">
-                <div class="about-text">
-                    <p>Hotel Casa Locato este un refugiu de eleganță și confort, situat într-o locație privilegiată. Cu o istorie bogată și o tradiție de ospitalitate de peste 20 de ani, ne mândrim să oferim oaspeților noștri o experiență memorabilă.</p>
+                <div class="about-text slide-in-left">
+                    <p>Hotel Casa Locato este un refugiu de eleganță și confort, situat în centrul Bucureștiului. Cu o istorie bogată și o tradiție de ospitalitate de peste 20 de ani, ne mândrim să oferim oaspeților noștri o experiență memorabilă.</p>
                     <p>Fiecare detaliu a fost gândit pentru a vă oferi o ședere perfectă, de la designul interior rafinat până la serviciile personalizate. Echipa noastră dedicată este întotdeauna disponibilă pentru a vă asigura că fiecare moment petrecut la Casa Locato este unul special.</p>
                     <p>Indiferent dacă sunteți în călătorie de afaceri sau în vacanță, vă garantăm că vă veți simți ca acasă, într-un mediu care combină profesionalismul cu căldura ospitalității autentice.</p>
                 </div>
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Casa Locato">
+                <div class="about-image slide-in-right">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Casa Locato">
                 </div>
             </div>
         </div>
@@ -426,7 +526,7 @@
             </div>
             <div class="rooms-grid">
                 <!-- Camera 1 -->
-                <div class="room-card">
+                <div class="room-card fade-in">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Camera Standard">
                     </div>
@@ -438,7 +538,7 @@
                 </div>
 
                 <!-- Camera 2 -->
-                <div class="room-card">
+                <div class="room-card fade-in">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Camera Superioară">
                     </div>
@@ -450,7 +550,7 @@
                 </div>
 
                 <!-- Camera 3 -->
-                <div class="room-card">
+                <div class="room-card fade-in">
                     <div class="room-image">
                         <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Suite">
                     </div>
@@ -503,7 +603,9 @@
                     <div class="form-group">
                         <label>Preț total estimat: <span id="total-price">0</span> RON</label>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">Trimite rezervarea pe WhatsApp</button>
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Trimite rezervarea pe WhatsApp
+                    </button>
                 </form>
             </div>
         </div>
@@ -517,18 +619,18 @@
                 <p>Nu ezitați să ne contactați pentru orice informații suplimentare</p>
             </div>
             <div class="contact-info">
-                <div class="contact-item">
-                    <i>📞</i>
+                <div class="contact-item fade-in">
+                    <i class="fas fa-phone"></i>
                     <h3>Telefon</h3>
                     <p>+40 729 552 767</p>
                 </div>
-                <div class="contact-item">
-                    <i>✉️</i>
+                <div class="contact-item fade-in">
+                    <i class="fas fa-envelope"></i>
                     <h3>Email</h3>
                     <p>contact@casalocato.ro</p>
                 </div>
-                <div class="contact-item">
-                    <i>📍</i>
+                <div class="contact-item fade-in">
+                    <i class="fas fa-map-marker-alt"></i>
                     <h3>Adresă</h3>
                     <p>Strada Principală, Nr. 123, București</p>
                 </div>
@@ -542,7 +644,7 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>Hotel Casa Locato</h3>
-                    <p>Oază de relaxare și confort în inima orașului, unde tradiția se întâlnește cu modernitatea.</p>
+                    <p>Oază de relaxare și confort în inima Bucureștiului, unde tradiția se întâlnește cu modernitatea.</p>
                 </div>
                 <div class="footer-column">
                     <h3>Link-uri rapide</h3>
@@ -556,9 +658,9 @@
                 <div class="footer-column">
                     <h3>Contact</h3>
                     <ul>
-                        <li>📞 +40 729 552 767</li>
-                        <li>✉️ contact@casalocato.ro</li>
-                        <li>📍 Strada Principală, Nr. 123, București</li>
+                        <li><i class="fas fa-phone"></i> +40 729 552 767</li>
+                        <li><i class="fas fa-envelope"></i> contact@casalocato.ro</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Strada Principală, Nr. 123, București</li>
                     </ul>
                 </div>
             </div>
@@ -602,14 +704,15 @@
             const persons = document.getElementById('persons').value;
             const totalPrice = totalPriceSpan.textContent;
             
-            // Creează mesajul pentru WhatsApp
-            const message = `Bună! Doresc să fac o rezervare la Hotel Casa Locato:%0A%0A` +
-                           `Nume: ${name}%0A` +
-                           `Telefon: ${phone}%0A` +
-                           `Tip cameră: ${roomType}%0A` +
-                           `Număr nopți: ${nights}%0A` +
-                           `Număr persoane: ${persons}%0A` +
-                           `Preț total estimat: ${totalPrice} RON`;
+            // Creează mesajul pentru WhatsApp cu emoji-uri
+            const message = `🏨 *REZERVARE HOTEL CASA LOCATO* 🏨%0A%0A` +
+                           `👤 *Nume client:* ${name}%0A` +
+                           `📞 *Telefon:* ${phone}%0A` +
+                           `🛏️ *Tip cameră:* ${roomType}%0A` +
+                           `🌙 *Număr nopți:* ${nights}%0A` +
+                           `👥 *Număr persoane:* ${persons}%0A` +
+                           `💰 *Preț total estimat:* ${totalPrice} RON%0A%0A` +
+                           `✅ *Vă rugăm să confirmați această rezervare!*`;
             
             // Deschide WhatsApp cu mesajul
             const whatsappUrl = `https://wa.me/40729552767?text=${message}`;
@@ -635,6 +738,54 @@
                     document.querySelector('.nav-links').classList.remove('active');
                 }
             });
+        });
+
+        // Animații la scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Adaugă clase de animație pentru elementele din interior
+                    if (entry.target.id === 'about') {
+                        const aboutText = entry.target.querySelector('.about-text');
+                        const aboutImage = entry.target.querySelector('.about-image');
+                        
+                        setTimeout(() => {
+                            aboutText.classList.add('slide-in-left');
+                            aboutImage.classList.add('slide-in-right');
+                        }, 300);
+                    }
+                    
+                    if (entry.target.id === 'rooms') {
+                        const roomCards = entry.target.querySelectorAll('.room-card');
+                        roomCards.forEach((card, index) => {
+                            setTimeout(() => {
+                                card.classList.add('fade-in');
+                            }, index * 200);
+                        });
+                    }
+                    
+                    if (entry.target.id === 'contact') {
+                        const contactItems = entry.target.querySelectorAll('.contact-item');
+                        contactItems.forEach((item, index) => {
+                            setTimeout(() => {
+                                item.classList.add('fade-in');
+                            }, index * 200);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        // Observă toate secțiunile
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
         });
     </script>
 </body>
