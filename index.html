@@ -3,10 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hotel Casa Locato</title>
+    <title>Hotel Casa Locato | București</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
-        /* Reset și stiluri generale */
+        /* Reset și variabile */
+        :root {
+            --primary-color: #e8d8c3;
+            --secondary-color: #f8f9fa;
+            --accent-color: #2c5e77;
+            --accent-light: #a5c8ca;
+            --text-color: #2d3436;
+            --light-text: #636e72;
+            --white: #ffffff;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -14,20 +27,15 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        :root {
-            --primary-color: #e8d8c3; /* Bej deschis */
-            --secondary-color: #f5f5f5; /* Alb gri */
-            --accent-color: #a5c8ca; /* Albastru deschis */
-            --text-color: #333;
-            --light-text: #666;
-            --white: #fff;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             color: var(--text-color);
             background-color: var(--secondary-color);
             line-height: 1.6;
+            overflow-x: hidden;
         }
 
         .container {
@@ -37,41 +45,86 @@
             padding: 0 15px;
         }
 
-        /* Animații */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        section {
+            padding: 80px 0;
         }
 
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(44, 94, 119, 0.2);
         }
 
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(50px); }
-            to { opacity: 1; transform: translateX(0); }
+        .btn:hover {
+            background-color: #234a5e;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(44, 94, 119, 0.3);
         }
 
-        .fade-in {
-            animation: fadeIn 1s ease-out;
+        .btn-whatsapp {
+            background-color: #25D366;
         }
 
-        .slide-in-left {
-            animation: slideInLeft 1s ease-out;
+        .btn-whatsapp:hover {
+            background-color: #20bd5c;
         }
 
-        .slide-in-right {
-            animation: slideInRight 1s ease-out;
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
         }
 
-        /* Header și navigație */
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title p {
+            color: var(--light-text);
+            max-width: 600px;
+            margin: 20px auto 0;
+            font-size: 18px;
+        }
+
+        /* Header */
         header {
             background-color: var(--white);
             box-shadow: var(--shadow);
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            width: 100%;
             z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 5px 0;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
         }
 
         .navbar {
@@ -79,16 +132,24 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 0;
+            transition: var(--transition);
         }
 
         .logo {
-            font-size: 24px;
-            font-weight: bold;
+            font-size: 28px;
+            font-weight: 700;
             color: var(--text-color);
             text-decoration: none;
+            display: flex;
+            align-items: center;
         }
 
         .logo span {
+            color: var(--accent-color);
+        }
+
+        .logo i {
+            margin-right: 10px;
             color: var(--accent-color);
         }
 
@@ -105,8 +166,9 @@
             text-decoration: none;
             color: var(--text-color);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
             position: relative;
+            padding: 5px 0;
         }
 
         .nav-links a::after {
@@ -114,17 +176,19 @@
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             background-color: var(--accent-color);
-            transition: width 0.3s;
+            transition: var(--transition);
         }
 
-        .nav-links a:hover::after {
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
             width: 100%;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--accent-color);
         }
 
@@ -132,103 +196,82 @@
             display: none;
             font-size: 24px;
             cursor: pointer;
+            color: var(--text-color);
         }
 
         /* Hero Section */
         .hero {
-            height: 80vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80');
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: var(--white);
+            padding-top: 80px;
         }
 
         .hero-content h1 {
-            font-size: 48px;
+            font-size: 52px;
             margin-bottom: 20px;
-            animation: fadeIn 1.5s ease-out;
+            font-weight: 700;
         }
 
         .hero-content p {
-            font-size: 20px;
-            margin-bottom: 30px;
-            animation: fadeIn 2s ease-out;
+            font-size: 22px;
+            margin-bottom: 40px;
+            max-width: 700px;
         }
 
-        .btn {
-            display: inline-block;
-            background-color: var(--accent-color);
-            color: var(--white);
-            padding: 12px 30px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background-color: #8fb3b5;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Secțiuni generale */
-        section {
-            padding: 80px 0;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s, transform 0.8s;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-title h2 {
-            font-size: 36px;
-            margin-bottom: 15px;
-            color: var(--text-color);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            width: 60%;
-            height: 3px;
-            background-color: var(--accent-color);
-            bottom: -10px;
-            left: 20%;
-        }
-
-        .section-title p {
-            color: var(--light-text);
-            max-width: 600px;
-            margin: 20px auto 0;
+        .hero-btns {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         /* Despre noi */
         .about-content {
             display: flex;
             align-items: center;
-            gap: 50px;
+            gap: 60px;
         }
 
         .about-text {
             flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 17px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature i {
+            color: var(--accent-color);
+            font-size: 20px;
+            margin-top: 5px;
         }
 
         .about-image {
@@ -236,28 +279,36 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.5s;
+            position: relative;
         }
 
-        .about-image:hover {
-            transform: scale(1.03);
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent-color), var(--accent-light));
+            opacity: 0.1;
+            z-index: 1;
         }
 
         .about-image img {
             width: 100%;
             height: auto;
             display: block;
-            transition: transform 0.5s;
+            transition: var(--transition);
         }
 
         .about-image:hover img {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         /* Camere */
         .rooms-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
         }
 
@@ -266,16 +317,30 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: all 0.3s;
+            transition: var(--transition);
+            position: relative;
         }
 
         .room-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .room-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: var(--white);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 2;
         }
 
         .room-image {
-            height: 200px;
+            height: 240px;
             overflow: hidden;
         }
 
@@ -283,7 +348,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s;
+            transition: var(--transition);
         }
 
         .room-card:hover .room-image img {
@@ -291,7 +356,7 @@
         }
 
         .room-details {
-            padding: 20px;
+            padding: 25px;
         }
 
         .room-details h3 {
@@ -301,53 +366,73 @@
 
         .room-price {
             color: var(--accent-color);
-            font-weight: bold;
-            font-size: 20px;
-            margin: 10px 0;
+            font-weight: 700;
+            font-size: 24px;
+            margin: 15px 0;
         }
 
-        /* Formular de rezervare */
+        .room-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+
+        .room-feature {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: var(--light-text);
+        }
+
+        .room-feature i {
+            color: var(--accent-color);
+        }
+
+        /* Rezervare */
         .reservation {
-            background-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-light) 100%);
+            position: relative;
         }
 
         .reservation-form {
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             background-color: var(--white);
-            padding: 40px;
-            border-radius: 10px;
+            padding: 50px;
+            border-radius: 15px;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
-        }
-
-        .reservation-form:hover {
-            transform: translateY(-5px);
+            position: relative;
+            z-index: 1;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
+            color: var(--text-color);
         }
 
         .form-control {
             width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+            padding: 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
             font-size: 16px;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            transition: var(--transition);
+            background-color: #f9f9f9;
         }
 
         .form-control:focus {
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 2px rgba(165, 200, 202, 0.3);
+            box-shadow: 0 0 0 3px rgba(44, 94, 119, 0.1);
             outline: none;
+            background-color: var(--white);
         }
 
         .form-row {
@@ -359,78 +444,222 @@
             flex: 1;
         }
 
+        .price-summary {
+            background-color: #f0f7fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .price-summary h4 {
+            margin-bottom: 10px;
+            color: var(--accent-color);
+        }
+
+        .total-price {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
         /* Contact */
-        .contact-info {
+        .contact-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
         }
 
         .contact-item {
-            text-align: center;
-            padding: 30px;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 25px;
             background-color: var(--white);
             border-radius: 10px;
             box-shadow: var(--shadow);
-            transition: all 0.3s;
+            transition: var(--transition);
         }
 
         .contact-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
-        .contact-item i {
-            font-size: 36px;
-            color: var(--accent-color);
-            margin-bottom: 15px;
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .contact-details h3 {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            height: 100%;
+            min-height: 400px;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
         }
 
         /* Footer */
         footer {
             background-color: var(--text-color);
             color: var(--white);
-            padding: 50px 0 20px;
+            padding: 70px 0 20px;
         }
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
         }
 
         .footer-column h3 {
-            margin-bottom: 20px;
-            font-size: 20px;
+            margin-bottom: 25px;
+            font-size: 22px;
+            position: relative;
+            padding-bottom: 10px;
         }
 
-        .footer-column ul {
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 2px;
+            background: var(--accent-light);
+            bottom: 0;
+            left: 0;
+        }
+
+        .footer-column p {
+            margin-bottom: 20px;
+            color: #b2bec3;
+        }
+
+        .footer-links {
             list-style: none;
         }
 
-        .footer-column ul li {
-            margin-bottom: 10px;
+        .footer-links li {
+            margin-bottom: 12px;
         }
 
-        .footer-column a {
-            color: #ddd;
+        .footer-links a {
+            color: #b2bec3;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .footer-column a:hover {
-            color: var(--accent-color);
+        .footer-links a:hover {
+            color: var(--accent-light);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            transform: translateY(-3px);
         }
 
         .copyright {
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #b2bec3;
+            font-size: 14px;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            opacity: 0;
+            visibility: hidden;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background: #234a5e;
+            transform: translateY(-5px);
         }
 
         /* Responsive Design */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .hero-content p {
+                font-size: 20px;
+            }
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-wrap: wrap;
@@ -445,6 +674,10 @@
                 width: 100%;
                 flex-direction: column;
                 margin-top: 20px;
+                background: var(--white);
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: var(--shadow);
             }
 
             .nav-links.active {
@@ -459,26 +692,65 @@
                 font-size: 36px;
             }
 
-            .about-content {
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .hero-btns {
                 flex-direction: column;
+                align-items: center;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
             }
 
             .form-row {
                 flex-direction: column;
                 gap: 0;
             }
+
+            .reservation-form {
+                padding: 30px;
+            }
+
+            .rooms-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section-title h2 {
+                font-size: 30px;
+            }
+
+            .room-features {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header și navigație -->
+    <!-- Header -->
     <header>
         <div class="container">
             <nav class="navbar">
-                <a href="#" class="logo">Hotel <span>Casa Locato</span></a>
+                <a href="#" class="logo"><i class="fas fa-hotel"></i>Hotel <span>Casa Locato</span></a>
                 <div class="menu-toggle">☰</div>
                 <ul class="nav-links">
-                    <li><a href="#home">Acasă</a></li>
+                    <li><a href="#home" class="active">Acasă</a></li>
                     <li><a href="#about">Despre</a></li>
                     <li><a href="#rooms">Camere</a></li>
                     <li><a href="#reservation">Rezervare</a></li>
@@ -490,10 +762,15 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Bun venit la Hotel Casa Locato</h1>
-            <p>Oaza de relaxare și confort în inima Bucureștiului</p>
-            <a href="#reservation" class="btn">Rezervă acum</a>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="animate__animated animate__fadeInDown">Hotel Casa Locato</h1>
+                <p class="animate__animated animate__fadeInUp">Oază de relaxare și confort în inima Bucureștiului</p>
+                <div class="hero-btns">
+                    <a href="#reservation" class="btn animate__animated animate__fadeInLeft">Rezervă acum</a>
+                    <a href="#rooms" class="btn btn-whatsapp animate__animated animate__fadeInRight">Vezi camerele</a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -505,13 +782,43 @@
                 <p>Descoperiți povestea și valorile hotelului nostru</p>
             </div>
             <div class="about-content">
-                <div class="about-text slide-in-left">
+                <div class="about-text">
+                    <h3>O tradiție de excelență în ospitalitate</h3>
                     <p>Hotel Casa Locato este un refugiu de eleganță și confort, situat în centrul Bucureștiului. Cu o istorie bogată și o tradiție de ospitalitate de peste 20 de ani, ne mândrim să oferim oaspeților noștri o experiență memorabilă.</p>
                     <p>Fiecare detaliu a fost gândit pentru a vă oferi o ședere perfectă, de la designul interior rafinat până la serviciile personalizate. Echipa noastră dedicată este întotdeauna disponibilă pentru a vă asigura că fiecare moment petrecut la Casa Locato este unul special.</p>
-                    <p>Indiferent dacă sunteți în călătorie de afaceri sau în vacanță, vă garantăm că vă veți simți ca acasă, într-un mediu care combină profesionalismul cu căldura ospitalității autentice.</p>
+                    <div class="features">
+                        <div class="feature">
+                            <i class="fas fa-wifi"></i>
+                            <div>
+                                <h4>Wi-Fi gratuit</h4>
+                                <p>Viteză mare în toate zonele hotelului</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-parking"></i>
+                            <div>
+                                <h4>Parcare privată</h4>
+                                <p>Loc de parcare securizat pentru oaspeți</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-utensils"></i>
+                            <div>
+                                <h4>Restaurant</h4>
+                                <p>Bucătărie românească și internațională</p>
+                            </div>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-concierge-bell"></i>
+                            <div>
+                                <h4>Servicii premium</h4>
+                                <p>Room service și concierge non-stop</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="about-image slide-in-right">
-                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Hotel Casa Locato">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hotel Casa Locato">
                 </div>
             </div>
         </div>
@@ -526,38 +833,62 @@
             </div>
             <div class="rooms-grid">
                 <!-- Camera 1 -->
-                <div class="room-card fade-in">
+                <div class="room-card">
+                    <div class="room-badge">Populară</div>
                     <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Camera Standard">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera Standard">
                     </div>
                     <div class="room-details">
                         <h3>Camera Standard</h3>
                         <p>O cameră confortabilă, perfectă pentru o ședere scurtă. Include pat dublu, baie privată și toate facilitățile necesare.</p>
                         <div class="room-price">250 RON/noapte</div>
+                        <div class="room-features">
+                            <div class="room-feature"><i class="fas fa-user-friends"></i> 2 persoane</div>
+                            <div class="room-feature"><i class="fas fa-ruler-combined"></i> 25 m²</div>
+                            <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
+                            <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                        </div>
+                        <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
                     </div>
                 </div>
 
                 <!-- Camera 2 -->
-                <div class="room-card fade-in">
+                <div class="room-card">
+                    <div class="room-badge">Recomandată</div>
                     <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Camera Superioară">
+                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Camera Superioară">
                     </div>
                     <div class="room-details">
                         <h3>Camera Superioară</h3>
                         <p>Mai spațioasă, cu vedere la oraș și facilități îmbunătățite. Ideală pentru o ședere relaxantă.</p>
                         <div class="room-price">350 RON/noapte</div>
+                        <div class="room-features">
+                            <div class="room-feature"><i class="fas fa-user-friends"></i> 2-3 persoane</div>
+                            <div class="room-feature"><i class="fas fa-ruler-combined"></i> 35 m²</div>
+                            <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
+                            <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                        </div>
+                        <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
                     </div>
                 </div>
 
                 <!-- Camera 3 -->
-                <div class="room-card fade-in">
+                <div class="room-card">
+                    <div class="room-badge">Lux</div>
                     <div class="room-image">
-                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Suite">
+                        <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Suite">
                     </div>
                     <div class="room-details">
                         <h3>Suite</h3>
                         <p>Experiență premium cu living separat, baie cu cadă și servicii exclusive. Lux și confort la cel mai înalt nivel.</p>
                         <div class="room-price">500 RON/noapte</div>
+                        <div class="room-features">
+                            <div class="room-feature"><i class="fas fa-user-friends"></i> 2-4 persoane</div>
+                            <div class="room-feature"><i class="fas fa-ruler-combined"></i> 55 m²</div>
+                            <div class="room-feature"><i class="fas fa-wifi"></i> Wi-Fi gratuit</div>
+                            <div class="room-feature"><i class="fas fa-tv"></i> TV Smart</div>
+                        </div>
+                        <a href="#reservation" class="btn" style="width: 100%;">Rezervă acum</a>
                     </div>
                 </div>
             </div>
@@ -575,11 +906,15 @@
                 <form id="booking-form">
                     <div class="form-group">
                         <label for="name">Nume complet</label>
-                        <input type="text" id="name" class="form-control" required>
+                        <input type="text" id="name" class="form-control" required placeholder="Introduceți numele dvs.">
                     </div>
                     <div class="form-group">
                         <label for="phone">Număr de telefon</label>
-                        <input type="tel" id="phone" class="form-control" required>
+                        <input type="tel" id="phone" class="form-control" required placeholder="Introduceți numărul de telefon">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresă de email</label>
+                        <input type="email" id="email" class="form-control" required placeholder="Introduceți adresa de email">
                     </div>
                     <div class="form-group">
                         <label for="room-type">Tip cameră</label>
@@ -592,6 +927,16 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
+                            <label for="checkin">Data check-in</label>
+                            <input type="date" id="checkin" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="checkout">Data check-out</label>
+                            <input type="date" id="checkout" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
                             <label for="nights">Număr de nopți</label>
                             <input type="number" id="nights" class="form-control" min="1" value="1" required>
                         </div>
@@ -600,10 +945,12 @@
                             <input type="number" id="persons" class="form-control" min="1" value="1" required>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label>Preț total estimat: <span id="total-price">0</span> RON</label>
+                    <div class="price-summary">
+                        <h4>Preț total estimat</h4>
+                        <div class="total-price"><span id="total-price">0</span> RON</div>
+                        <p>Prețul nu include taxele de sejur</p>
                     </div>
-                    <button type="submit" class="btn" style="width: 100%;">
+                    <button type="submit" class="btn btn-whatsapp" style="width: 100%;">
                         <i class="fab fa-whatsapp"></i> Trimite rezervarea pe WhatsApp
                     </button>
                 </form>
@@ -618,21 +965,41 @@
                 <h2>Contact</h2>
                 <p>Nu ezitați să ne contactați pentru orice informații suplimentare</p>
             </div>
-            <div class="contact-info">
-                <div class="contact-item fade-in">
-                    <i class="fas fa-phone"></i>
-                    <h3>Telefon</h3>
-                    <p>+40 729 552 767</p>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Telefon</h3>
+                            <p>+40 729 552 767</p>
+                            <p>Disponibil 24/7 pentru rezervări</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Email</h3>
+                            <p>contact@casalocato.ro</p>
+                            <p>Rezervări: rezervari@casalocato.ro</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h3>Adresă</h3>
+                            <p>Strada Principala, Nr. 123</p>
+                            <p>Sector 1, București, România</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="contact-item fade-in">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email</h3>
-                    <p>contact@casalocato.ro</p>
-                </div>
-                <div class="contact-item fade-in">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3>Adresă</h3>
-                    <p>Strada Principală, Nr. 123, București</p>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.873553456202!2d26.10221531582226!3d44.43621760638672!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1f8c8a3c8c8c9%3A0x3b3b3b3b3b3b3b3b!2sBucharest%2C%20Romania!5e0!3m2!1sen!2s!4v1620000000000!5m2!1sen!2s" allowfullscreen="" loading="lazy"></iframe>
                 </div>
             </div>
         </div>
@@ -645,22 +1012,29 @@
                 <div class="footer-column">
                     <h3>Hotel Casa Locato</h3>
                     <p>Oază de relaxare și confort în inima Bucureștiului, unde tradiția se întâlnește cu modernitatea.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-tripadvisor"></i></a>
+                    </div>
                 </div>
                 <div class="footer-column">
                     <h3>Link-uri rapide</h3>
-                    <ul>
-                        <li><a href="#home">Acasă</a></li>
-                        <li><a href="#about">Despre noi</a></li>
-                        <li><a href="#rooms">Camere</a></li>
-                        <li><a href="#reservation">Rezervare</a></li>
+                    <ul class="footer-links">
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Acasă</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> Despre noi</a></li>
+                        <li><a href="#rooms"><i class="fas fa-chevron-right"></i> Camere</a></li>
+                        <li><a href="#reservation"><i class="fas fa-chevron-right"></i> Rezervare</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
                     <h3>Contact</h3>
-                    <ul>
-                        <li><i class="fas fa-phone"></i> +40 729 552 767</li>
-                        <li><i class="fas fa-envelope"></i> contact@casalocato.ro</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Strada Principală, Nr. 123, București</li>
+                    <ul class="footer-links">
+                        <li><a href="tel:+40729552767"><i class="fas fa-phone"></i> +40 729 552 767</a></li>
+                        <li><a href="mailto:contact@casalocato.ro"><i class="fas fa-envelope"></i> contact@casalocato.ro</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt"></i> Strada Principala, Nr. 123, București</a></li>
                     </ul>
                 </div>
             </div>
@@ -670,16 +1044,45 @@
         </div>
     </footer>
 
+    <!-- Back to top -->
+    <div class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </div>
+
     <script>
         // Meniu mobil
         document.querySelector('.menu-toggle').addEventListener('click', function() {
             document.querySelector('.nav-links').classList.toggle('active');
         });
 
+        // Header la scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+
         // Calcul preț total
         const roomTypeSelect = document.getElementById('room-type');
         const nightsInput = document.getElementById('nights');
         const totalPriceSpan = document.getElementById('total-price');
+        const checkinInput = document.getElementById('checkin');
+        const checkoutInput = document.getElementById('checkout');
+
+        // Setăm data minimă pentru check-in la ziua de azi
+        const today = new Date().toISOString().split('T')[0];
+        checkinInput.min = today;
 
         function calculateTotalPrice() {
             const selectedOption = roomTypeSelect.options[roomTypeSelect.selectedIndex];
@@ -689,8 +1092,33 @@
             totalPriceSpan.textContent = totalPrice;
         }
 
+        function updateNights() {
+            if (checkinInput.value && checkoutInput.value) {
+                const checkin = new Date(checkinInput.value);
+                const checkout = new Date(checkoutInput.value);
+                const diffTime = Math.abs(checkout - checkin);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                nightsInput.value = diffDays > 0 ? diffDays : 1;
+                calculateTotalPrice();
+            }
+        }
+
         roomTypeSelect.addEventListener('change', calculateTotalPrice);
         nightsInput.addEventListener('input', calculateTotalPrice);
+        checkinInput.addEventListener('change', function() {
+            if (this.value) {
+                const nextDay = new Date(this.value);
+                nextDay.setDate(nextDay.getDate() + 1);
+                checkoutInput.min = nextDay.toISOString().split('T')[0];
+                
+                if (!checkoutInput.value || new Date(checkoutInput.value) <= new Date(this.value)) {
+                    checkoutInput.value = nextDay.toISOString().split('T')[0];
+                }
+                
+                updateNights();
+            }
+        });
+        checkoutInput.addEventListener('change', updateNights);
 
         // Formular de rezervare
         document.getElementById('booking-form').addEventListener('submit', function(e) {
@@ -699,48 +1127,63 @@
             // Obține datele din formular
             const name = document.getElementById('name').value;
             const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
             const roomType = roomTypeSelect.options[roomTypeSelect.selectedIndex].text;
             const nights = nightsInput.value;
             const persons = document.getElementById('persons').value;
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
             const totalPrice = totalPriceSpan.textContent;
             
-            // Creează mesajul pentru WhatsApp cu emoji-uri
-            const message = `🏨 *REZERVARE HOTEL CASA LOCATO* 🏨%0A%0A` +
-                           `👤 *Nume client:* ${name}%0A` +
-                           `📞 *Telefon:* ${phone}%0A` +
-                           `🛏️ *Tip cameră:* ${roomType}%0A` +
-                           `🌙 *Număr nopți:* ${nights}%0A` +
-                           `👥 *Număr persoane:* ${persons}%0A` +
-                           `💰 *Preț total estimat:* ${totalPrice} RON%0A%0A` +
-                           `✅ *Vă rugăm să confirmați această rezervare!*`;
+            // Detectăm dacă este dispozitiv mobil
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            
+            // Creează mesajul pentru WhatsApp
+            let message = `🏨 *REZERVARE HOTEL CASA LOCATO* 🏨%0A%0A`;
+            
+            if (isMobile) {
+                // Mesaj cu emoji-uri pentru dispozitive mobile
+                message += `👤 *Nume client:* ${name}%0A`;
+                message += `📞 *Telefon:* ${phone}%0A`;
+                message += `📧 *Email:* ${email}%0A`;
+                message += `🛏️ *Tip cameră:* ${roomType}%0A`;
+                message += `📅 *Check-in:* ${checkin}%0A`;
+                message += `📅 *Check-out:* ${checkout}%0A`;
+                message += `🌙 *Număr nopți:* ${nights}%0A`;
+                message += `👥 *Număr persoane:* ${persons}%0A`;
+                message += `💰 *Preț total estimat:* ${totalPrice} RON%0A%0A`;
+                message += `✅ *Vă rugăm să confirmați această rezervare!*%0A`;
+                message += `❓ *Aveți întrebări? Sunați-ne la +40 729 552 767*`;
+            } else {
+                // Mesaj simplu pentru desktop
+                message += `*REZERVARE HOTEL CASA LOCATO*%0A%0A`;
+                message += `*Nume client:* ${name}%0A`;
+                message += `*Telefon:* ${phone}%0A`;
+                message += `*Email:* ${email}%0A`;
+                message += `*Tip cameră:* ${roomType}%0A`;
+                message += `*Check-in:* ${checkin}%0A`;
+                message += `*Check-out:* ${checkout}%0A`;
+                message += `*Număr nopți:* ${nights}%0A`;
+                message += `*Număr persoane:* ${persons}%0A`;
+                message += `*Preț total estimat:* ${totalPrice} RON%0A%0A`;
+                message += `*Vă rugăm să confirmați această rezervare!*%0A`;
+                message += `*Aveți întrebări? Sunați-ne la +40 729 552 767*`;
+            }
             
             // Deschide WhatsApp cu mesajul
             const whatsappUrl = `https://wa.me/40729552767?text=${message}`;
             window.open(whatsappUrl, '_blank');
         });
 
-        // Scroll smooth pentru link-uri
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Închide meniul mobil dacă este deschis
-                    document.querySelector('.nav-links').classList.remove('active');
-                }
+        // Back to top functionality
+        document.querySelector('.back-to-top').addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
         });
 
-        // Animații la scroll
+        // Activează secțiunile la scroll
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -750,42 +1193,34 @@
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    
-                    // Adaugă clase de animație pentru elementele din interior
-                    if (entry.target.id === 'about') {
-                        const aboutText = entry.target.querySelector('.about-text');
-                        const aboutImage = entry.target.querySelector('.about-image');
-                        
-                        setTimeout(() => {
-                            aboutText.classList.add('slide-in-left');
-                            aboutImage.classList.add('slide-in-right');
-                        }, 300);
-                    }
-                    
-                    if (entry.target.id === 'rooms') {
-                        const roomCards = entry.target.querySelectorAll('.room-card');
-                        roomCards.forEach((card, index) => {
-                            setTimeout(() => {
-                                card.classList.add('fade-in');
-                            }, index * 200);
-                        });
-                    }
-                    
-                    if (entry.target.id === 'contact') {
-                        const contactItems = entry.target.querySelectorAll('.contact-item');
-                        contactItems.forEach((item, index) => {
-                            setTimeout(() => {
-                                item.classList.add('fade-in');
-                            }, index * 200);
-                        });
-                    }
                 }
             });
         }, observerOptions);
 
-        // Observă toate secțiunile
         document.querySelectorAll('section').forEach(section => {
             observer.observe(section);
+        });
+
+        // Navigație activă
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        window.addEventListener('scroll', function() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
         });
     </script>
 </body>
